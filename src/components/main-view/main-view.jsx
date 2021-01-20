@@ -2,6 +2,9 @@
 import React from 'react';
 import axios from 'axios';
 
+// import React Router
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 // import components
 import { LoginView } from '../login-view/login-view';
 import { RegisterView } from '../registration-view/registration-view';
@@ -35,7 +38,7 @@ export class MainView extends React.Component {
     super();
     // initial state set to null
     this.state = {
-      movies: null,
+      movies: [],
       selectedMovie: null,
       user: null,
       register: null
@@ -54,20 +57,32 @@ export class MainView extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
+
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getMovies(accessToken);
+    }
   }
 
   // when a movie is clicked, this function is invoked and updates the state of the `selectedMovie` property to that movie
-  onMovieClick(movie) {
-    this.setState({
-      selectedMovie: movie
-    });
-  }
+  // onMovieClick(movie) {
+  //   this.setState({
+  //     selectedMovie: movie
+  //   });
+  // }
 
   // when a user successfully logs in, this function updates the `user` property in state to that particular user
-  onLoggedIn(user) {
-    this.setState({
-      user
-    });
+  // onLoggedIn(user) {
+  //   this.setState({
+  //     user
+  //   });
+  // }
+
+  onLoggedIn(authData) {
+    // ...
   }
 
   // when a user registers, this function updates the `register`property
@@ -96,83 +111,110 @@ export class MainView extends React.Component {
     // before the movies have been loaded
     if (!movies) return <div className="main-view" />;
 
+    // return (
+    //   <React.Fragment>
+    //     <div className='main-view'>
+
+    //       <header>
+    //         <Navbar
+    //           collapseOnSelect
+    //           expand='lg'
+    //           fixed='top'
+    //         >
+
+    //           <Navbar.Brand href='#home'>
+    //             <img
+    //               src={logo}
+    //               className='d-inline-block align-top logo'
+    //               alt='React Bootstrap logo'
+    //             />
+    //           </Navbar.Brand>
+
+    //           <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+    //           <Navbar.Collapse id='responsive-navbar-nav'>
+    //             <Nav className='mr-auto'>
+    //               <Nav.Link href='#movies'>Movies</Nav.Link>
+    //               <Nav.Link href='#genre'>Genre</Nav.Link>
+    //               <Nav.Link href='#director'>Director</Nav.Link>
+    //               <Nav.Link href='#logout'>Logout</Nav.Link>
+    //             </Nav>
+    //             <Form inline>
+    //               <InputGroup>
+    //                 <FormControl
+    //                   placeholder='Search'
+    //                   aria-label='Search'
+    //                   aria-describedby='basic-addon2'
+    //                 />
+    //                 <InputGroup.Append>
+    //                   <InputGroup.Text id='basic-addon2'>
+    //                     <FaSearch />
+    //                   </InputGroup.Text>
+    //                 </InputGroup.Append>
+    //               </InputGroup>
+    //             </Form>
+    //           </Navbar.Collapse>
+
+    //         </Navbar>
+    //       </header>
+
+    //       <div className='main-body text-center'>
+    //         {selectedMovie ? (
+    //           <MovieView
+    //             movie={selectedMovie}
+    //             onClick={() => this.setInititalState()}
+    //           />
+    //         ) : (
+    //             <Container className='p-5'>
+    //               <Row>
+    //                 {movies.map((movie) => (
+    //                   <Col xs={12} md={6} lg={4} xl={3} key={movie._id} className='p-2'>
+    //                     <MovieCard
+    //                       key={movie._id}
+    //                       movie={movie}
+    //                       onClick={(movie) => this.onMovieClick(movie)}
+    //                     />
+    //                   </Col>
+    //                 ))}
+    //               </Row>
+    //             </Container>
+    //           )}
+    //       </div>
+
+    //       <footer className='bg-dark text-white text-center'>
+    //         <p className='pt-3'>
+    //           Made by Marc Oller using React.
+    //         </p>
+    //       </footer>
+
+    //     </div>
+    //   </React.Fragment>
+    // );
+
     return (
-      <React.Fragment>
-        <div className='main-view'>
+      // <Router>
+      //   <div className="main-view">
+      //     <Route exact path="/" render={() => movies.map(m => <MovieCard key={m._id} movie={m} />)} />
+      //     <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
+      //   </div>
+      // </Router>
 
-          <header>
-            <Navbar
-              collapseOnSelect
-              expand='lg'
-              fixed='top'
-            >
-
-              <Navbar.Brand href='#home'>
-                <img
-                  src={logo}
-                  className='d-inline-block align-top logo'
-                  alt='React Bootstrap logo'
-                />
-              </Navbar.Brand>
-
-              <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-              <Navbar.Collapse id='responsive-navbar-nav'>
-                <Nav className='mr-auto'>
-                  <Nav.Link href='#movies'>Movies</Nav.Link>
-                  <Nav.Link href='#genre'>Genre</Nav.Link>
-                  <Nav.Link href='#director'>Director</Nav.Link>
-                  <Nav.Link href='#logout'>Logout</Nav.Link>
-                </Nav>
-                <Form inline>
-                  <InputGroup>
-                    <FormControl
-                      placeholder='Search'
-                      aria-label='Search'
-                      aria-describedby='basic-addon2'
-                    />
-                    <InputGroup.Append>
-                      <InputGroup.Text id='basic-addon2'>
-                        <FaSearch />
-                      </InputGroup.Text>
-                    </InputGroup.Append>
-                  </InputGroup>
-                </Form>
-              </Navbar.Collapse>
-
-            </Navbar>
-          </header>
-
-          <div className='main-body text-center'>
-            {selectedMovie ? (
-              <MovieView
-                movie={selectedMovie}
-                onClick={() => this.setInititalState()}
-              />
-            ) : (
-                <Container className='p-5'>
-                  <Row>
-                    {movies.map((movie) => (
-                      <Col xs={12} md={6} lg={4} xl={3} key={movie._id} className='p-2'>
-                        <MovieCard
-                          key={movie._id}
-                          movie={movie}
-                          onClick={(movie) => this.onMovieClick(movie)}
-                        />
-                      </Col>
-                    ))}
-                  </Row>
-                </Container>
-              )}
-          </div>
-
-          <footer className='bg-dark text-white text-center'>
-            <p className='pt-3'>
-              Made by Marc Oller using React.
-            </p>
-          </footer>
-
+      <Router>
+        <div className="main-view">
+          <Route exact path="/" render={() => {
+            if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+            return movies.map(m => <MovieCard key={m._id} movie={m} />)
+          }
+          } />
+          <Route path="/register" render={() => <RegistrationView />} />          <Route exact path="/movies/:movieId" render={/* movie view */} />
+          <Route exact path="/genres/:name" render={/* genre view*/} />
+          <Route path="/directors/:name" render={({ match }) => {
+            if (!movies) return <div className="main-view" />;
+            return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />
+          }
+          } />
         </div>
-      </React.Fragment>
+      </Router>
     );
+
   }
 }

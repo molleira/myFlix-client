@@ -1,6 +1,9 @@
 // myFlix-client/src/movie-view/movie-view.jsx
 import React from 'react';
 
+// import React Router
+import { Link } from "react-router-dom";
+
 // import propTypes and Bootstrap components
 import PropTypes from 'prop-types';
 import { Card, Button } from 'react-bootstrap';
@@ -19,29 +22,47 @@ export class MovieView extends React.Component {
     if (!movie) return null;
 
     // if the state is null returns this
+    // return (
+    //   <div className='movie-view'>
+    //     <Card style={{ margin: 'auto', padding: '50px' }}>
+    //       <Card.Img variant='top' src={movie.ImagePath} />
+    //       <Card.Body>
+    //         <Card.Title style={{ color: '#EB3F3F' }}>{movie.Title}</Card.Title>
+    //         <Card.Text>
+    //           <span className='label text-danger'>Description: </span>
+    //           <span className='value'>{movie.Description}</span>
+    //         </Card.Text>
+    //         <Card.Text>
+    //           <span className='label text-danger'>Genre: </span>
+    //           <span className='value'>{movie.Genre.Name}</span>
+    //         </Card.Text>
+    //         <Card.Text>
+    //           <span className='label text-danger'>Director: </span>
+    //           <span className='value'>{movie.Director.Name}</span>
+    //         </Card.Text>
+    //         <Button onClick={() => onClick()} variant='danger'>Back</Button>
+    //       </Card.Body>
+    //     </Card>
+    //   </div>
+    // );
+
     return (
-      <div className='movie-view'>
-        <Card style={{ margin: 'auto', padding: '50px' }}>
-          <Card.Img variant='top' src={movie.ImagePath} />
-          <Card.Body>
-            <Card.Title style={{ color: '#EB3F3F' }}>{movie.Title}</Card.Title>
-            <Card.Text>
-              <span className='label text-danger'>Description: </span>
-              <span className='value'>{movie.Description}</span>
-            </Card.Text>
-            <Card.Text>
-              <span className='label text-danger'>Genre: </span>
-              <span className='value'>{movie.Genre.Name}</span>
-            </Card.Text>
-            <Card.Text>
-              <span className='label text-danger'>Director: </span>
-              <span className='value'>{movie.Director.Name}</span>
-            </Card.Text>
-            <Button onClick={() => onClick()} variant='danger'>Back</Button>
-          </Card.Body>
-        </Card>
-      </div>
+      <Card style={{ width: '16rem' }}>
+        <Card.Img variant="top" src={movie.ImagePath} />
+        <Card.Body>
+          <Card.Title>{movie.Title}</Card.Title>
+          <Card.Text>{movie.Description}</Card.Text>
+          <Link to={`/directors/${movie.Director.Name}`}>
+            <Button variant="link">Director</Button>
+          </Link>
+
+          <Link to={`/genres/${movie.Genre.Name}`}>
+            <Button variant="link">Genre</Button>
+          </Link>
+        </Card.Body>
+      </Card>
     );
+
   }
 }
 

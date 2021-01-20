@@ -24,6 +24,21 @@ export function RegisterView(props) {
     props.onRegister('test');
   };
 
+  axios.post('https://theflix.herokuapp.com/users', {
+    Username: username,
+    Password: password,
+    Email: email,
+    Birthday: birthday
+  })
+    .then(response => {
+      const data = response.data;
+      console.log(data);
+      window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
+    })
+    .catch(e => {
+      console.log('error registering the user')
+    });
+
   return (
     <React.Fragment>
       <Form className='form-register'>
