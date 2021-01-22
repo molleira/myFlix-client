@@ -14,7 +14,7 @@ import './movie-card.scss'
 // export MovieCard
 export class MovieCard extends React.Component {
   render() {
-    const { movie, onClick } = this.props;
+    const { movie } = this.props;
 
     // return (
     //   <Card
@@ -31,16 +31,29 @@ export class MovieCard extends React.Component {
     // );
 
     return (
-      <Card style={{ width: '16rem' }}>
-        <Card.Img variant="top" src={movie.ImagePath} />
-        <Card.Body>
-          <Card.Title>{movie.Title}</Card.Title>
-          <Card.Text>{movie.Description}</Card.Text>
-          <Link to={`/movies/${movie._id}`}>
-            <Button variant="link">Open</Button>
-          </Link>
-        </Card.Body>
-      </Card>
+      // <Card style={{ width: '16rem' }}>
+      //   <Card.Img variant="top" src={movie.ImagePath} />
+      //   <Card.Body>
+      //     <Card.Title>{movie.Title}</Card.Title>
+      //     <Card.Text>{movie.Description}</Card.Text>
+      //     <Link to={`/movies/${movie._id}`}>
+      //       <Button variant="link">Open</Button>
+      //     </Link>
+      //   </Card.Body>
+      // </Card>
+
+      <div className='movie-cards'>
+        <Link to={`/movies/${movie._id}`}>
+          <Card border='danger' style={{ width: '200', height: 'auto' }}>
+            <Card.Header>{movie.title}</Card.Header>
+            <img
+              className='movie-poster'
+              src={movie.imagePath}
+              alt='movie poster'
+            />
+          </Card>
+        </Link>
+      </div>
     );
 
   }
@@ -63,5 +76,5 @@ MovieCard.propTypes = {
       Death: PropTypes.number,
     }),
   }).isRequired,
-  onClick: PropTypes.func.isRequired,
+  // onClick: PropTypes.func.isRequired,
 };
