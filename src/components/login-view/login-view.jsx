@@ -27,7 +27,7 @@ export function LoginView(props) {
 
     // send POST login request
     axios
-      .post('https://theflix.herokuapp.com/auth/login', {
+      .post('https://theflix.herokuapp.com/login', {
         username: username,
         password: password,
       })
