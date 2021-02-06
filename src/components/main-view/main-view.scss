@@ -1,34 +1,8 @@
-.navbar {
-  height: 60px;
-  background-color: white;
-  box-shadow: 0 1px 70px 0 black;
-}
-
-.logo {
-  width: 100px;
-  margin-right: 54px;
-}
-
-.nav-link {
-  margin-top: 10px;
-  margin-right: 35px;
-}
-
-.show, .collapsing {
-  background-color: white;
-  border-radius: 5px;
-  padding: 15px;
-}
-
-.input-group {
-  margin-right: 14px;
-}
-
-.main-body {
-  margin-top: 50px;
+.app-container {
   background-color: #EB3F3F;
 }
 
-footer {
-  height: 50px;
+.main-view {
+  padding-top: 75px;
+  justify-content: center;
 }

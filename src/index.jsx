@@ -1,6 +1,7 @@
 // client/src/index.jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Container from 'react-bootstrap/Container';
 
 import { MainView } from './components/main-view/main-view';
 
@@ -10,8 +11,11 @@ import './index.scss';
 // main component (will eventually use all the others)
 class MyFlixApplication extends React.Component {
   render() {
-    return <MainView />;
-  }
+    return (
+    <Container>
+      <MainView />
+    </Container>
+    )}
 }
 
 // find the root of our app

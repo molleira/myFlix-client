@@ -1,31 +1,69 @@
-// myFlix-client/src/director-view/director-view.jsx
+// // myFlix-client/src/director-view/director-view.jsx
 import React from 'react';
-// import { render } from 'sass';
-// import { MovieView } from '../movie-view/movie-view';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-// import styling
+//styling
+import { Button, Card, Row } from 'react-bootstrap';
 import './director-view.scss';
 
-// export DirectorView
+// export DirectorView class component
 export class DirectorView extends React.Component {
-  // initialise state
   constructor() {
     super();
+
     this.state = {};
   }
 
-  // render director's info
   render() {
-    const { movie } = this.props;
-    if (!movie) return null;
+    const { movies, director } = this.props;
+
+    if (!director) return null;
+
     return (
-      <div className='director-description p-2'>
-        <p>Director's Biography</p>
-        <p className='text-danger'>{MovieView.director.name}</p>
-        <p>{MovieView.director.bio}</p>
-        <p>Birth: {MovieView.director.birth}</p>
-        <p>{MovieView.director.death ? `Death: ${movie.director.death}` : ''}</p>
-      </div>
+      <Row className="director-view">
+        <Card className='director-card' border="light">
+
+          <Card.Title style={{ color: '#EB3F3F' }}>{director.Name}</Card.Title>
+
+          <Card.Text>
+            <span className="label text-danger">Description: </span>
+            <span className="value">{director.Bio}</span>
+          </Card.Text>
+
+          <Card.Text className="director-birth">
+            <span className="label text-danger">Birth: </span>
+            <span className="value">{director.Birth}</span>
+          </Card.Text>
+
+          <Card.Text className="director-death">
+            <span className="label text-danger">Death: </span>
+            <span className="value">{director.Death}</span>
+          </Card.Text>
+
+          <div className="director-movies">
+            <span className="label text-danger">Movies: </span>
+            {movies.map((m) => (
+              <div className="movie" key={m._id}>{m.Title}</div>
+            ))}
+          </div>
+
+          <Link to={'/'}>
+            <Button variant="outline-danger">Back</Button>
+          </Link>
+
+        </Card>
+      </Row>
     );
   }
 }
+
+// static propTypes properties for DirectorView
+DirectorView.propTypes = {
+  director: PropTypes.shape({
+    Name: PropTypes.string.isRequired,
+    Bio: PropTypes.string.isRequired,
+    Birth: PropTypes.string.isRequired,
+    Death: PropTypes.string,
+  }).isRequired,
+};
