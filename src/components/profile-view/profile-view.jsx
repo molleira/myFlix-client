@@ -176,7 +176,7 @@ export class ProfileView extends React.Component {
                           <Card.Img variant="top" src={movie.ImagePath} />
                           <Card.Body className="movie-card-body">
                             <Card.Title className="movie-card-title">{movie.Title}</Card.Title>
-                            <Button size="sm" block className="profile-button remove-favorite" onClick={(e) => this.handleRemoveFavorite(e, movie._id)}>
+                            <Button size="sm" variant='outline-danger' block className="profile-button remove-favorite" onClick={(e) => this.handleRemoveFavorite(e, movie._id)}>
                               Remove
                             </Button>
                           </Card.Body>
