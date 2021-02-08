@@ -52,6 +52,8 @@ export class ProfileView extends React.Component {
 
   // remove favorite method
   handleRemoveFavorite(e, movie) {
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('user');
     e.preventDefault();
     axios
       .delete(`https://theflix.herokuapp.com/users/${username}/Movies/${movie}`, {
