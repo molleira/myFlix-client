@@ -1,0 +1,24 @@
+.navbar {
+    height: 50px;
+    background-color: white;
+    box-shadow: 0 1px 70px 0 black;
+  }
+  
+  .logo {
+    width: 100px;
+    margin-bottom: 5px;
+  }
+  
+  .nav-link {
+    margin-left: 30px;
+  }
+  
+  .show, .collapsing {
+    background-color: white;
+    border-radius: 5px;
+    padding: 15px;
+  }
+
+  button.navbar-toggler.collapsed {
+    margin-bottom: 10px;
+  }
