@@ -1,7 +1,7 @@
 // // myFlix-client/src/director-view/director-view.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 //styling
 import { Button, Card, Row } from 'react-bootstrap';
@@ -59,11 +59,11 @@ export class DirectorView extends React.Component {
 }
 
 // static propTypes properties for DirectorView
-DirectorView.propTypes = {
-  director: PropTypes.shape({
-    Name: PropTypes.string.isRequired,
-    Bio: PropTypes.string.isRequired,
-    Birth: PropTypes.string.isRequired,
-    Death: PropTypes.string,
-  }).isRequired,
-};
+// DirectorView.propTypes = {
+//   director: PropTypes.shape({
+//     Name: PropTypes.string.isRequired,
+//     Bio: PropTypes.string.isRequired,
+//     Birth: PropTypes.string.isRequired,
+//     Death: PropTypes.string,
+//   }).isRequired,
+// };

@@ -1,11 +1,15 @@
 // myFlix-client/src/profile-view/profile-view.jsx
 import React from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 // styling
 import { Button, Card, CardDeck, Form, Row } from 'react-bootstrap';
 import './profile-view.scss';
+
+// redux
+import { connect } from 'react-redux';
+import { setUser, setUserToken, setFavoriteMovies } from '../../actions/actions';
 
 // export ProfileView class component
 export class ProfileView extends React.Component {
@@ -24,9 +28,10 @@ export class ProfileView extends React.Component {
 
   componentDidMount() {
     const accessToken = localStorage.getItem('token');
-    if (accessToken !== null) {
-      this.getUser(accessToken);
-    }
+    // if (accessToken !== null) {
+    //   this.getUser(accessToken);
+    // }
+    this.getUser(accessToken);
   }
 
   // get user method
@@ -239,16 +244,26 @@ export class ProfileView extends React.Component {
   }
 }
 
-ProfileView.propTypes = {
-  user: PropTypes.shape({
-    FavoriteMovies: PropTypes.arrayOf(
-      PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        Title: PropTypes.string.isRequired,
-      })
-    ),
-    Username: PropTypes.string.isRequired,
-    Email: PropTypes.string.isRequired,
-    Birthday: PropTypes.string,
-  }),
-};
+// ProfileView.propTypes = {
+//   user: PropTypes.shape({
+//     FavoriteMovies: PropTypes.arrayOf(
+//       PropTypes.shape({
+//         _id: PropTypes.string.isRequired,
+//         Title: PropTypes.string.isRequired,
+//       })
+//     ),
+//     Username: PropTypes.string.isRequired,
+//     Email: PropTypes.string.isRequired,
+//     Birthday: PropTypes.string,
+//   }),
+// };
+
+let mapStateToProps = state => {
+  return {
+    user: state.user,
+    userToken: state.userToken,
+    favoriteMovies: state.favoriteMovies
+  }
+}
+
+export default connect(mapStateToProps, { setUser, setUserToken, setFavoriteMovies })(ProfileView);
